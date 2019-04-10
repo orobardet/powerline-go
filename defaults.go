@@ -118,6 +118,9 @@ var themes = map[string]Theme{
 		KubeNamespaceFg: 170,
 		KubeNamespaceBg: 17,
 
+		MelvisFg: 202,
+		MelvisBg: 236,
+
 		DotEnvFg: 15, // white
 		DotEnvBg: 55, // purple
 
