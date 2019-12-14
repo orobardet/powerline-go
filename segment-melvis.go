@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/joho/godotenv"
+	pwl "github.com/justjanne/powerline-go/powerline"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
@@ -134,10 +135,10 @@ func segmentMelvis(p *powerline) {
 	)
 
 	// Add the segment
-	p.appendSegment("melvis", segment{
-		content:        content,
-		foreground:     p.theme.MelvisFg,
-		background:     p.theme.MelvisBg,
-		hideSeparators: false,
+	p.appendSegment("melvis", pwl.Segment{
+		Content:        content,
+		Foreground:     p.theme.MelvisFg,
+		Background:     p.theme.MelvisBg,
+		HideSeparators: false,
 	})
 }
