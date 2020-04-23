@@ -90,10 +90,11 @@ func MelvisAnnotateSource(text string, from uint8) string {
 	return fmt.Sprintf("%s%s", text, sourceIcon)
 }
 
-func segmentMelvis(p *powerline) {
+func segmentMelvis(p *powerline) []pwl.Segment {
 	cwd, err := os.Getwd()
+	segments := []pwl.Segment{}
 	if err != nil {
-		return
+		return segments
 	}
 	stackSettings := &StackbuilderSettings{}
 	MelvisReadStackBuilderSettings(stackSettings, path.Join(cwd, "/settings.yml"))
@@ -101,7 +102,7 @@ func segmentMelvis(p *powerline) {
 	MelvisReadEnv(stackSettings)
 
 	if stackSettings.StackName == "" && stackSettings.PfName == "" && stackSettings.SBVersion == "" {
-		return
+		return segments
 	}
 
 	if stackSettings.StackName == "" {
@@ -135,10 +136,13 @@ func segmentMelvis(p *powerline) {
 	)
 
 	// Add the segment
-	p.appendSegment("melvis", pwl.Segment{
+	segments = append(segments, pwl.Segment{
+		Name:           "melvis",
 		Content:        content,
 		Foreground:     p.theme.MelvisFg,
 		Background:     p.theme.MelvisBg,
 		HideSeparators: false,
 	})
+
+	return segments
 }
